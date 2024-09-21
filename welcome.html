@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/heart.png" type="image/x-icon">
+    <title>Kovak | Welcome</title>
+
+    <style>
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.greetings span {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.flag, .retroceder {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: filter 0.3s ease; 
+}
+
+.flag:hover, .retroceder:hover {
+    filter: drop-shadow(0 0 10px rgb(255, 192, 192))
+            drop-shadow(0 0 20px rgb(255, 164, 164))
+            drop-shadow(0 0 30px rgb(255, 208, 208)); 
+}
+
+.button-container > * {
+    margin: 0 20px; 
+}
+    </style>
+
+</head>
+<body>
+
+    <audio id="miAudio" loop>
+        <source src="audio/acustic.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <script>
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault(); 
+            var audio = document.getElementById('miAudio');
+            audio.play(); 
+        });
+    </script>
+    
+    <div class="greetings" id="greetingsContainer">
+        <span>B</span>
+        <span>I</span>
+        <span>E</span>
+        <span>N</span>
+        <span>V</span>
+        <span>E</span>
+        <span>N</span>
+        <span>I</span>
+        <span>D</span>
+        <span>A</span>
+    </div>
+
+    <div class="description">
+        <span id="specialMessage">💕 Tengo algo especial para ti y espero te guste 💕</span>
+    </div>
+
+    <div class="button-container">
+        <img src="img/backspace.png" class="retroceder" id="prevTextButton" alt="Retroceder">
+
+        <div class="button">
+            <button id="changeTextButton">💐 Ver siguiente 💐</button>
+        </div>
+
+        <img src="img/traductor.png" id="languageFlag" class="flag" alt="Cambiar idioma">
+    </div>
+
+    <script>
+        const phrasesEs = [
+            "💐 Tengo algo especial para ti, espero te guste 💐",
+            "💐 Gracias por estar a mi lado, eres la mejor hipopotamo bebe 💐",
+            "💐 Estoy muy orgulloso de tenerte en mi vida y quiero hacer de todo para hacerte feliz 💐",
+            "💐 Siempre vas a contar conmigo, en las malas y buenas, yo nunca te dejare sola mi vida 💐",
+            "💐 Me encanta pasar tiempo contigo, cada segundo, minuto, horas, espero a ti también te guste <3 💐",
+            "💐 Gracias por llegar a mi vida y convertirte en lo más importante, quiero construir un futuro contigo💐",
+            "💐 Te prometo que haré que cada día sea mejor, que nuestra relación funcione y dure para siempre, me esforzare por ti 💐",
+            "💐 Nunca me voy a rendir contigo, si en algún momento tu no tienes fuerzas, yo te las daré y mutuamente vamos a hacer que lo nuestro crezca 💐"
+        ];
+
+        const loveWordsEs = [
+            ["B", "I", "E", "N", "V", "E", "N", "I", "D", "A"],
+            ["P", "R", "I", "N", "C", "E", "S", "A"],
+            ["M", "E", " ", " ", "G", "U", "S", "T", "A", "S"],
+            ["T", "E", " ", " ", "A", "M", "O"],
+            ["T", "E", " ", " ", "A", "D", "O", "R", "O"],
+            ["E", "R", "E", "S", " ", " ", "L", "A", " ", " ", "M", "E", "J", "O", "R"],
+            ["B", "E", "B", "E", " ", " ", "H", "I", "P", "O", "P", "O", "T", "A", "M", "O"],
+            ["M", "I", " ", " ", "P","R", "O", "M", "E", "S", "A"]
+        ];
+
+        const phrasesEn = [
+            "💐 I have something special for you, I hope you like it 💐",
+            "💐 Thank you for being by my side, you are the best baby hipopotamo 💐",
+            "💐 I am very proud to have you in my life and I want to do everything to make you happy 💐",
+            "💐 You will always count on me, in the bad and good, I will never leave you alone in my life 💐",
+            "💐 I love spending time with you, every second, minute, hour, I hope you like it too <3 💐",
+            "💐 Thank you for coming into my life and becoming the most important thing, I want to build a future with you 💐",
+            "💐 I promise you that I will make every day better, that our relationship works and lasts forever, I will do my best for you 💐",
+            "💐 I will never give up on you, if at any time you don't have the strength, I will give it to you and mutually we will make ours grow 💐"
+        ];
+
+        const loveWordsEn = [
+            ["W", "E", "L", "C", "O", "M", "E"],
+            ["P", "R", "I", "N", "C", "E", "S", "S"],
+            ["I", " ", " ", "L", "I", "K", "E", " ", " ", "Y", "O", "U"],
+            ["I", " ", " ", "L", "O", "V", "E", " ", " ", "Y", "O", "U"],
+            ["I", " ", " ", "A", "D", "O", "R", "E", " ", " ", "Y", "O", "U"],
+            ["Y", "O", "U", " ", " ", "A", "R", "E", " ", " ", "T", "H", "E", " ", " ", "B", "E", "S", "T"],
+            ["B", "A", "B", "Y", " ", " ", "H", "I", "P", "O", "P", "O", "T", "A", "M", "O"],
+            ["M", "Y", " ", " ", "P","R", "O", "M", "I", "S", "E"]
+        ];
+
+        let clickCount = 0;
+        let currentLanguage = "es";  
+
+        const description = document.getElementById('specialMessage');
+        const button = document.getElementById('changeTextButton');
+        const prevButton = document.getElementById('prevTextButton');
+        const greetingsContainer = document.getElementById('greetingsContainer');
+        const flag = document.getElementById('languageFlag');
+
+        function updateContent() {
+            const currentWord = currentLanguage === "es" ? loveWordsEs[clickCount] : loveWordsEn[clickCount];
+            const currentPhrase = currentLanguage === "es" ? phrasesEs[clickCount] : phrasesEn[clickCount];
+
+            greetingsContainer.innerHTML = ""; 
+
+            currentWord.forEach(letter => {
+                const span = document.createElement('span');
+                span.innerText = letter;
+                greetingsContainer.appendChild(span);
+            });
+
+            description.innerText = currentPhrase;
+
+            button.innerText = currentLanguage === "es" ? "💐 Ver siguiente 💐" : "💐 See next 💐";
+
+            if (clickCount === phrasesEs.length - 1) {
+                button.innerText = currentLanguage === "es" ? "💐 Te amo, mira tu regalo 💐" : "💐 I love you, see your gift 💐";
+            }
+        }
+
+        button.addEventListener('click', function() {
+            if (clickCount < phrasesEs.length - 1) {
+                clickCount++;
+                updateContent();
+            } else {
+                window.location.href = "flowers.html";
+            }
+        });
+
+        prevButton.addEventListener('click', function() {
+            if (clickCount > 0) {
+                clickCount--;
+                updateContent();
+            }
+        });
+
+        flag.addEventListener('click', function() {
+            currentLanguage = currentLanguage === "es" ? "en" : "es"; 
+            updateContent();  
+        });
+
+        updateContent();
+    </script>
+</body>
+</html>

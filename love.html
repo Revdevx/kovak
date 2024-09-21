@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kovak | My Love</title>
+    <link rel="icon" href="img/romance.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<audio id="miAudio" loop>
+    <source src="audio/wolves.mp3" type="audio/mpeg">
+    Tu navegador no soporta el elemento de audio.
+</audio>
+
+<script>
+    document.addEventListener('contextmenu', function(event) {
+        event.preventDefault(); 
+        var audio = document.getElementById('miAudio');
+        audio.play(); 
+    });
+</script>
+
+<style>
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #050000;
+        text-align: center;
+        overflow: hidden;
+        transition: background 1s ease;
+    }
+
+    h1 {
+        font-size: 3em;
+        color: #fff;
+        margin-top: 20%;
+        transition: opacity 1s ease;
+    }
+
+    h1:hover {
+        filter: drop-shadow(0 0 10px rgb(255, 73, 231))
+        drop-shadow(0 0 20px rgb(116, 47, 105))
+        drop-shadow(0 0 30px rgb(247, 67, 238)); 
+    }
+
+    .button {
+        padding: 15px 30px;
+        font-size: 20px;
+        border: none;
+        cursor: pointer;
+        margin: 20px;
+        border-radius: 8px;
+        transition: background 0.3s ease;
+    }
+
+    .accept-btn {
+        background-color: #2395ff;
+        color: white;
+    }
+
+    .accept-btn:hover {
+        background-color: #cf84f1;
+        filter: drop-shadow(0 0 10px rgb(102, 3, 89))
+        drop-shadow(0 0 20px rgb(212, 0, 255))
+        drop-shadow(0 0 30px rgb(145, 67, 247)); 
+    }
+
+    .decline-btn {
+        background-color: #2b2a2a;
+        color: white;
+        transition: transform 0.2s ease;
+    }
+
+    .decline-btn:hover {
+        filter: drop-shadow(0 0 10px rgb(150, 150, 150))
+        drop-shadow(0 0 20px rgb(197, 197, 197))
+        drop-shadow(0 0 30px rgb(148, 148, 148)); 
+    }
+
+    .heart {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        filter: drop-shadow(0 0 10px rgb(102, 3, 89))
+        drop-shadow(0 0 20px rgb(104, 47, 116))
+        drop-shadow(0 0 30px rgb(145, 67, 247)); 
+        background-color: rgb(31, 0, 46);
+        transform: rotate(-45deg);
+        animation: float 5s infinite ease-in-out;
+    }
+
+    .heart:before,
+    .heart:after {
+        content: "";
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: rgb(31, 0, 46);
+        border-radius: 50%;
+        filter: drop-shadow(0 0 10px rgb(102, 3, 89))
+        drop-shadow(0 0 20px rgb(104, 47, 116))
+        drop-shadow(0 0 30px rgb(145, 67, 247)); 
+    }
+
+    .heart:before {
+        top: -25px;
+        left: 0;
+    }
+
+    .heart:after {
+        left: 25px;
+        top: 0;
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(0) rotate(-45deg);
+        }
+        50% {
+            transform: translateY(-50px) rotate(-45deg);
+        }
+        100% {
+            transform: translateY(0) rotate(-45deg);
+        }
+    }
+
+    .back-button {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 100;
+        cursor: pointer;
+        width: 40px;
+    }
+
+    .back-button:hover {
+        filter: drop-shadow(0 0 10px rgb(255, 0, 212))
+        drop-shadow(0 0 20px rgb(104, 47, 116))
+        drop-shadow(0 0 30px rgb(145, 67, 247)); 
+    }
+
+    .translate-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 100;
+        cursor: pointer;
+        width: 40px;
+    }
+
+    .translate-button:hover {
+        filter: drop-shadow(0 0 10px rgb(255, 0, 212))
+        drop-shadow(0 0 20px rgb(104, 47, 116))
+        drop-shadow(0 0 30px rgb(145, 67, 247)); 
+    }
+
+    .hidden {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 1s ease;
+    }
+
+    #response-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 1s ease, visibility 1s ease;
+    }
+
+    #response-container.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    #thanks-message {
+        font-size: 3em;
+        color: white;
+        animation: float-message 3s infinite ease-in-out;
+        position: relative; /* Para evitar que los corazones lo tapen */
+        z-index: 10;
+    }
+
+    #thanks-message:hover {
+        filter: drop-shadow(0 0 10px rgb(102, 3, 89))
+        drop-shadow(0 0 20px rgb(104, 47, 116))
+        drop-shadow(0 0 30px rgb(145, 67, 247)); 
+    }
+
+    @keyframes float-message {
+        0% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-30px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    .floating-hearts {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 5; /* Para que los corazones estén detrás del mensaje */
+    }
+
+    /* Más corazones flotantes con diferentes posiciones */
+    .floating-hearts .heart {
+        animation: float 10s infinite ease-in-out;
+    }
+
+    .heart1 { top: 10%; left: 15%; }
+    .heart2 { top: 20%; left: 75%; }
+    .heart3 { top: 40%; left: 30%; }
+    .heart4 { top: 60%; left: 80%; }
+    .heart5 { top: 70%; left: 45%; }
+    .heart6 { top: 85%; left: 20%; }
+    .heart7 { top: 50%; left: 90%; }
+    .heart8 { top: 90%; left: 60%; }
+
+    /* Animación circle-in-hesitate */
+    @keyframes circle-in-hesitate {
+        0% {
+            clip-path: circle(0%);
+        }
+        40% {
+            clip-path: circle(40%);
+        }
+        100% {
+            clip-path: circle(125%);
+        }
+    }
+
+    [transition-style="in:circle:hesitate"] {
+        animation: 2.5s cubic-bezier(.25, 1, .30, 1) circle-in-hesitate both;
+    }
+</style>
+
+<body>
+
+    <!-- Botón para retroceder a la página anterior -->
+    <a href="hipopotamo.html">
+        <img src="img/backspace.png" class="back-button" alt="Regresar al Inicio">
+    </a>
+
+    <!-- Botón para traducir -->
+    <img src="img/traductor.png" class="translate-button" alt="Traducir" onclick="toggleLanguage()">
+
+    <h1 id="question">💐¿Quieres ser mi novia?💐</h1>
+
+    <button class="button accept-btn" onclick="accept()">👉 Acepto 👈</button>
+    <button class="button decline-btn" id="decline-btn" onmouseover="moveButton()">❎ No acepto ❎</button>
+
+    <!-- Contenedor de respuesta con animación -->
+    <div id="response-container">
+        <div id="thanks-message">Owwww, te amo mucho mi amor 💐</div>
+        <div class="floating-hearts">
+            <div class="heart heart1"></div>
+            <div class="heart heart2"></div>
+            <div class="heart heart3"></div>
+            <div class="heart heart4"></div>
+            <div class="heart heart5"></div>
+            <div class="heart heart6"></div>
+            <div class="heart heart7"></div>
+            <div class="heart heart8"></div>
+        </div>
+    </div>
+
+    <script>
+        // Variables para controlar el botón de "No acepto"
+        let lastX = 50;
+        let lastY = 50;
+
+        // Función para mover el botón "No acepto" a una posición más lejana
+        function moveButton() {
+            const button = document.getElementById("decline-btn");
+            const movementRange = 300; // Incrementamos el rango de movimiento a 300 píxeles
+
+            // Calcular nueva posición cercana pero en un rango más amplio
+            const randomX = Math.random() * movementRange - movementRange / 2;
+            const randomY = Math.random() * movementRange - movementRange / 2;
+
+            // Actualizar las posiciones
+            lastX += randomX;
+            lastY += randomY;
+
+            // Asegurarse de que el botón permanezca en los límites de la pantalla
+            if (lastX < 0) lastX = 0;
+            if (lastY < 0) lastY = 0;
+            if (lastX > window.innerWidth - button.offsetWidth) lastX = window.innerWidth - button.offsetWidth;
+            if (lastY > window.innerHeight - button.offsetHeight) lastY = window.innerHeight - button.offsetHeight;
+
+            // Aplicar la nueva posición
+            button.style.transform = `translate(${lastX}px, ${lastY}px)`;
+        }
+
+        // Función cuando se acepta
+        function accept() {
+            // Ocultar la pregunta y los botones
+            document.getElementById("question").classList.add("hidden");
+            document.querySelector(".accept-btn").classList.add("hidden");
+            document.querySelector(".decline-btn").classList.add("hidden");
+
+            // Mostrar el contenedor de respuesta con la animación circle-in-hesitate
+            const responseContainer = document.getElementById("response-container");
+            responseContainer.setAttribute("transition-style", "in:circle:hesitate");
+            responseContainer.classList.add("visible");
+        }
+
+        // Cambio de idioma
+        let isEnglish = false;
+        function toggleLanguage() {
+            const question = document.getElementById("question");
+            const acceptBtn = document.querySelector(".accept-btn");
+            const declineBtn = document.getElementById("decline-btn");
+            const thanksMessage = document.getElementById("thanks-message");
+
+            if (isEnglish) {
+                question.innerText = "💐 ¿Quieres ser mi novia? 💐";
+                acceptBtn.innerText = "👉 Acepto 👈";
+                declineBtn.innerText = "❎ No acepto ❎";
+                thanksMessage.innerText = "Owwww, te amo mucho mi amor 💐";
+                isEnglish = false;
+            } else {
+                question.innerText = "💐 Do you want to be my girlfriend? 💐";
+                acceptBtn.innerText = "👉 I accept 👈";
+                declineBtn.innerText = "❎ I don't accept ❎";
+                thanksMessage.innerText = "Owwww, I love you so much my love 💐";
+                isEnglish = true;
+            }
+        }
+    </script>
+
+</body>
+</html>
